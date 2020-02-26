@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := hello-world
+PROJECT_NAME := wordclock-v2
 
 include $(IDF_PATH)/make/project.mk
 

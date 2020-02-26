@@ -33,25 +33,17 @@ extern "C" {
  *
  * @return ESP_OK on successful connection
  */
-esp_err_t example_connect(void);
+esp_err_t wifi_connect(void);
 
 /**
- * Counterpart to example_connect, de-initializes Wi-Fi or Ethernet
+ * Counterpart to wifi_connect, de-initializes Wi-Fi or Ethernet
  */
-esp_err_t example_disconnect(void);
-
-/**
- * @brief Configure stdin and stdout to use blocking I/O
- *
- * This helper function is used in ASIO examples. It wraps installing the
- * UART driver and configuring VFS layer to use UART driver for console I/O.
- */
-esp_err_t example_configure_stdin_stdout(void);
+esp_err_t wifi_disconnect(void);
 
 /**
  * @brief Configure SSID and password
  */
-esp_err_t example_set_connection_info(const char *ssid, const char *passwd);
+esp_err_t wifi_set_connection_info(const char *ssid, const char *passwd);
 
 #ifdef __cplusplus
 }

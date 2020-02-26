@@ -9,7 +9,6 @@
 
 #include <string.h>
 
-#include "protocol_examples_common.h"
 #include "sdkconfig.h"
 #include "esp_event.h"
 #include "esp_wifi.h"
@@ -21,6 +20,8 @@
 #include "freertos/event_groups.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
+
+#include "wifi.h"
 
 #define GOT_IPV4_BIT BIT(0)
 #define GOT_IPV6_BIT BIT(1)
@@ -40,7 +41,7 @@ static char s_connection_passwd[32] = "pandabaer";
 static ip6_addr_t s_ipv6_addr;
 #endif
 
-static const char *TAG = "example_connect";
+static const char *TAG = "wifi_connect";
 
 static void on_wifi_disconnect(void *arg, esp_event_base_t event_base,
                                int32_t event_id, void *event_data)
@@ -126,7 +127,7 @@ static void stop(void)
     ESP_ERROR_CHECK(esp_wifi_deinit());
 }
 
-esp_err_t example_connect(void)
+esp_err_t wifi_connect(void)
 {
     if (s_connect_event_group != NULL) {
         return ESP_ERR_INVALID_STATE;
@@ -143,7 +144,7 @@ esp_err_t example_connect(void)
     return ESP_OK;
 }
 
-esp_err_t example_disconnect(void)
+esp_err_t wifi_disconnect(void)
 {
     if (s_connect_event_group == NULL) {
         return ESP_ERR_INVALID_STATE;
@@ -156,7 +157,7 @@ esp_err_t example_disconnect(void)
     return ESP_OK;
 }
 
-esp_err_t example_set_connection_info(const char *ssid, const char *passwd)
+esp_err_t wifi_set_connection_info(const char *ssid, const char *passwd)
 {
     strncpy(s_connection_name, ssid, sizeof(s_connection_name));
     strncpy(s_connection_passwd, passwd, sizeof(s_connection_passwd));

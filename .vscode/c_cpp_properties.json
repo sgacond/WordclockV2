@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "esp8266",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/Users/silvan/esp/ESP8266_RTOS_SDK/components/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86",
+            "compilerArgs": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**",
+                    "/Users/silvan/esp/ESP8266_RTOS_SDK/components/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
