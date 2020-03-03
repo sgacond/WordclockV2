@@ -13,6 +13,7 @@ struct led {
     uint8_t w3;
 };
 
+void leds_init();
 void leds_display(struct led *leds, uint32_t length);
 
 #ifdef __cplusplus

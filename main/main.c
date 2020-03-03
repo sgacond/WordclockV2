@@ -24,6 +24,7 @@
 #include "wifi.h"
 #include "watch.h"
 #include "words.h"
+#include "leds.h"
 
 static const char *TAG = "main";
 static QueueHandle_t tickQueue;
@@ -32,6 +33,8 @@ static void main_task(void *arg)
 {
     struct tm now;
     char strftime_buf[64];
+
+    leds_init();
 
     while(1) {
         if(xQueueReceive(tickQueue, &now, (TickType_t)10) == pdPASS) {

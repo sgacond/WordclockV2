@@ -24,6 +24,7 @@
 
 #include "esp_log.h"
 #include "words.h"
+#include "leds.h"
 
 static const char *TAG = "words";
 
@@ -33,6 +34,15 @@ void words_display(struct tm time) {
     uint8_t minPart1 = (uint8_t)(time.tm_min / 5);
     uint8_t minPart2 = time.tm_min % 5;
     
+    // dummy
+    struct led leds[1];
+    leds[0].global = 31;
+    leds[0].w1 = 0xFF;
+    leds[0].w2 = 0xFF;
+    leds[0].w3 = 0xFF;
+    leds_display(leds, 1);
+
+
     switch(minPart1) {
         case 0:
             ESP_LOGI(TAG, "Es ist %i Uhr (+ %i).", hourPart, minPart2);
