@@ -34,7 +34,7 @@ static void main_task(void *arg)
     struct tm now;
     char strftime_buf[64];
 
-    leds_init();
+    leds_init(11);
 
     while(1) {
         if(xQueueReceive(tickQueue, &now, (TickType_t)10) == pdPASS) {

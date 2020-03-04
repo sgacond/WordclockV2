@@ -28,19 +28,28 @@
 
 static const char *TAG = "words";
 
+static int test = 0;
+
 void words_display(struct tm time) {
 
     uint8_t hourPart = time.tm_hour % 12;
     uint8_t minPart1 = (uint8_t)(time.tm_min / 5);
     uint8_t minPart2 = time.tm_min % 5;
     
+
+
     // dummy
-    struct led leds[1];
-    leds[0].global = 31;
-    leds[0].w1 = 0xFF;
-    leds[0].w2 = 0xFF;
-    leds[0].w3 = 0xFF;
-    leds_display(leds, 1);
+
+    leds_set(test, 0);
+
+    test++;
+    if(test > 10)
+        test = 0;
+
+    leds_set(test, 0.15);
+    leds_update();
+
+
 
 
     switch(minPart1) {
