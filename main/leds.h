@@ -16,6 +16,7 @@ struct led {
 void leds_init(int n);
 void leds_set(int i, float v);
 void leds_update();
+void leds_clear();
 
 #ifdef __cplusplus
 }

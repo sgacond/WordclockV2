@@ -15,7 +15,7 @@
 #define PIN_D 13
 #define PIN_CLK 14
 
-#define BITBANG_DELAY_US 10
+#define BITBANG_DELAY_US 1
 
 static int nLeds = 0;
 struct led *leds;
@@ -36,17 +36,20 @@ void leds_init(int n) {
     nLeds = n;
     leds = malloc(sizeof(struct led) * n);
 
+    leds_clear();
+}
+
+void leds_clear() {
     for(int i=0; i<nLeds; i++) {
         leds[i].global = 31;
         leds[i].w1 = 0x00;
         leds[i].w2 = 0x00;
         leds[i].w3 = 0x00;
     }
-
 }
 
 void leds_set(int i, float v) {
-    if(i >= nLeds)
+    if(i >= nLeds || i < 0)
         return;
 
     uint32_t val = v * 0xFFFFFF;
@@ -70,7 +73,7 @@ void leds_update() {
     ets_delay_us(BITBANG_DELAY_US);
 
     // led frames
-    for (int i = 0; i < nLeds; i++) {
+    for (int i = 0; i <= nLeds; i++) {
 
         uint32_t ledBits = 
             (((111 << 5) | (leds[i].global & 0b00011111)) << 24) |

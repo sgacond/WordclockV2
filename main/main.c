@@ -34,9 +34,39 @@ static void main_task(void *arg)
     struct tm now;
     char strftime_buf[64];
 
-    leds_init(11);
+    leds_init(110);
+
+
+    // test
+    struct tm test = {
+        .tm_year = 120,
+        .tm_mon = 0,
+        .tm_mday = 1,
+        .tm_hour = 0,
+        .tm_min = 0,
+        .tm_sec = 0
+    };
+    words_display(test);
+
+
+    for(int h=0; h<=23; h++) {
+        for(int m=0; m<=60; m+=5) {
+            test.tm_hour = h;
+            test.tm_min = m;
+
+            words_display(test);
+
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+        }
+    }
+
+
+
+
+
 
     while(1) {
+
         if(xQueueReceive(tickQueue, &now, (TickType_t)10) == pdPASS) {
 
             strftime(strftime_buf, sizeof(strftime_buf), "%c", &now);
@@ -55,7 +85,7 @@ void app_main()
     ESP_ERROR_CHECK(wifi_connect());
 
     tickQueue = xQueueCreate(10, sizeof(struct tm));
-    watch_start_task(tickQueue);
+    //watch_start_task(tickQueue);
 
     xTaskCreate(main_task, "main_task", 2048, NULL, 10, NULL);
 }
